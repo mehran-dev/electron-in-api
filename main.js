@@ -16,6 +16,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
     },
   });
 
@@ -50,6 +51,12 @@ ipcMain.on("getFiles", (event, directory) => {
       event.sender.send("fileList", { files });
     }
   });
+});
+
+ipcMain.on("get-title", (e, t) => {
+  const webContent = e.sender;
+  const win = BrowserWindow.fromWebContents(webContent);
+  win.setTitle(t);
 });
 
 ipcMain.on("checkSecurity", (event, filePath) => {
