@@ -13,4 +13,6 @@ contextBridge.exposeInMainWorld("API", {
   setTitle: (t) => {
     ipcRenderer.send("get-title", t);
   },
+  onUpdateCounter: (callback) =>
+    ipcRenderer.on("update-counter", (_event, value) => callback(value)),
 });

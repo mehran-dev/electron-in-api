@@ -68,3 +68,10 @@ ipcMain.on("checkSecurity", (event, filePath) => {
   //   }
   // });
 });
+setInterval(() => {
+  mainWindow.webContents.send(
+    "update-counter",
+    Math.floor(Math.random() * 1000) + __dirname
+  );
+  console.log("sending data");
+}, 1000);
